@@ -1,0 +1,23 @@
+meta {
+  name: CompleteInvite
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/api/users/complete-invite
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "token": "b821fefa0411b1f9a9a74f1156a8cef3e89cc3e6403f480a2ebff7561fa449ff",
+    "password": "alice"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

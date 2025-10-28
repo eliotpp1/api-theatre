@@ -1,25 +1,10 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const User = require("./../models/users");
+const User = require("../models/UserModel");
+const Invitation = require("../models/InvitationModel");
 const bcrypt = require("bcrypt");
 
-
-exports.signUpUser = (req, res, next) => {
-    bcrypt
-        .hash(req.body.password, 10)
-        .then((hash) => {
-            const user = new User({
-                email: req.body.email,
-                password: hash,
-            });
-            user
-                .save()
-                .then(() => res.status(201).json({ message: "Utilisateur créé !" }))
-                .catch((error) => res.status(400).json({ error }));
-        })
-        .catch((error) => res.status(500).json({ error }));
-};
-
+// loginUser: Authentifie un utilisateur et retourne un token JWT
 exports.loginUser = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then((user) => {
@@ -27,7 +12,7 @@ exports.loginUser = (req, res, next) => {
                 res.status(401).json({ message: "Paire login/mot de passe incorrecte" });
             } else {
                 bcrypt
-                    .compare(req.body.password, user.password)
+                    .compare(req.body.password, user.passwordHash)
                     .then((valid) => {
                         if (!valid) {
                             res.status(401).json({ message: "Paire login/mot de passe incorrecte" });
@@ -40,6 +25,64 @@ exports.loginUser = (req, res, next) => {
                     })
                     .catch((error) => res.status(500).json({ error }));
             }
+        })
+        .catch((error) => res.status(500).json({ error }));
+};
+
+// getCurrentUser: Récupère les informations de l'utilisateur courant
+exports.getCurrentUser = (req, res, next) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+            return res.status(401).json({ message: "Token manquant" });
+        }
+
+        const token = authHeader.split(" ")[1];
+        if (!token) {
+            return res.status(401).json({ message: "Format de token invalide" });
+        }
+
+        const decodedToken = jwt.verify(token, process.env.PASSWORD_TOKEN_JWT);
+        const userId = decodedToken.userId;
+
+        User.findById(userId)
+            .select("-passwordHash")
+            .then((user) => {
+                if (!user) {
+                    return res.status(404).json({ message: "Utilisateur non trouvé" });
+                }
+                res.status(200).json(user);
+            })
+            .catch((error) => res.status(500).json({ error }));
+    } catch (error) {
+        res.status(401).json({ message: "Token invalide ou expiré", error });
+    }
+};
+
+// completeInvite: Permet à un utilisateur invité de définir son mot de passe et d'activer son compte
+exports.completeInvite = (req, res, next) => {
+    const { token, password } = req.body;
+
+    Invitation.findOne({ token, used: false, expiresAt: { $gt: new Date() } })
+        .then((invitation) => {
+            if (!invitation) {
+                return res.status(400).json({ message: "Token invalide ou expiré." });
+            }
+
+            bcrypt.hash(password, 10)
+                .then((hash) => {
+                    User.findByIdAndUpdate(invitation.userId, {
+                        passwordHash: hash,
+                        isActive: true
+                    })
+                        .then(() => {
+                            invitation.used = true;
+                            invitation.save();
+                            res.status(200).json({ message: "Mot de passe défini, compte activé." });
+                        })
+                        .catch((error) => res.status(500).json({ error }));
+                })
+                .catch((error) => res.status(500).json({ error }));
         })
         .catch((error) => res.status(500).json({ error }));
 };

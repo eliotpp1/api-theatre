@@ -1,15 +1,15 @@
 // on importe le paquet express
 const express = require('express');
 const mongoose = require('mongoose')
-const logementsRoutes = require('./routes/logements.js');
 const userRoutes = require('./routes/users.js')
+const adminRoutes = require('./routes/admin.js');
 
 
 // On crée l'application Express
 const app = express();
 
 mongoose
-    .connect("mongodb+srv://eliot:pouplier@clusterapitheatre.5bmmuer.mongodb.net/casa?appName=clusterapitheatre", {
+    .connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -24,8 +24,8 @@ app.use((req, res, next) => {
 });
 app.use(express.json())
 
-app.use('/api/logements', logementsRoutes)
 app.use("/api/users", userRoutes);
+app.use("/api/admins", adminRoutes);
 
 // On export l’application
 module.exports = app;

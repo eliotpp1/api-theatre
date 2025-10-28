@@ -1,0 +1,26 @@
+meta {
+  name: SignUpUser
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/admins/signup
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "nom": "Dupont",
+    "prenom": "Alice",
+    "dateNaissance": "2000-05-12",
+    "email": "alice.dupont@example.com"
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
