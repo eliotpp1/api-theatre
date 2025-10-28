@@ -9,4 +9,4 @@ const invitationSchema = new mongoose.Schema({
 
 const Invitation = mongoose.model("Invitation", invitationSchema);
 
-module.exports = Invitation; // ✅ exporter le modèle seul
+module.exports = Invitation;

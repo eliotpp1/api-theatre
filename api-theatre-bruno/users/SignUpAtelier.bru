@@ -1,0 +1,24 @@
+meta {
+  name: SignUpAtelier
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/api/users/atelier/:atelierId
+  body: none
+  auth: inherit
+}
+
+params:path {
+  atelierId: 690133fc235cbc7202d46006
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTAxMmIwOWQ4NDZlZGYzNzZhMDNkM2MiLCJpYXQiOjE3NjE2ODc1ODcsImV4cCI6MTc2MTc3Mzk4N30.qw4UI6YpWKS_M0x_PN2OrAal07dvTrf0JJbcYLjeIWg
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

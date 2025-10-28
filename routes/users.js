@@ -12,5 +12,8 @@ router.post("/login", userCtrl.loginUser);
 // Récupérer les informations de l'utilisateur courant
 router.get("/me", userCtrl.getCurrentUser);
 
+// Participer à un atelier
+router.post("/atelier/:atelierId", userCtrl.signuUpAtelier);
+
 // Fin du document
 module.exports = router;

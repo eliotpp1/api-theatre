@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const userRoutes = require('./routes/users.js')
 const adminRoutes = require('./routes/admin.js');
+const atelierRoutes = require('./routes/ateliers.js');
 
 
 // On crée l'application Express
@@ -26,6 +27,7 @@ app.use(express.json())
 
 app.use("/api/users", userRoutes);
 app.use("/api/admins", adminRoutes);
+app.use("/api/ateliers", atelierRoutes);
 
 // On export l’application
 module.exports = app;

@@ -5,15 +5,18 @@ meta {
 }
 
 post {
-  url: http://localhost:3000/api/users/complete-invite
+  url: http://localhost:3000/api/users/complete-invite?token=8b96ffb12193353b15b740c797b29378e32e86ef5e952978d370e4e31add217c
   body: json
   auth: inherit
 }
 
+params:query {
+  token: 8b96ffb12193353b15b740c797b29378e32e86ef5e952978d370e4e31add217c
+}
+
 body:json {
   {
-    "token": "49deb1031f4bebafd3f3399d7c436b7187f3fd132845eee5e577e85010b6f5d4",
-    "password": "bernadette"
+    "password": "membre"
   }
 }
 

@@ -1,0 +1,30 @@
+meta {
+  name: CreateAtelier
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/ateliers
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTAxMGZjYTM1M2M4ZDljMTQzODU5ZDciLCJpYXQiOjE3NjE2ODMzMTUsImV4cCI6MTc2MTc2OTcxNX0.-GjQk-TuULeBZAn4MRSKek9LNtEynpvSHEkWLgtjMfI
+}
+
+body:json {
+  {
+    "date": "2025-11-02",
+    "nombreParticipant": 10,
+    "lieux": "Théâtre municipal",
+    "description": "Atelier d’improvisation pour adultes",
+    "coachId": "69010fca353c8d9c143859d7"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -4,7 +4,7 @@ meta {
   seq: 4
 }
 
-put {
+delete {
   url: http://localhost:3000/api/admins/users/:id
   body: json
   auth: inherit
@@ -16,15 +16,6 @@ params:path {
 
 headers {
   Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTAwZGZhN2ZmNTczYzRiMzE4MGMzYTIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjE2NjU5MjMsImV4cCI6MTc2MTc1MjMyM30.-mOxChjTW1DV-fmKiAE944iefWKKLEeXOZpOLoLuUJ8
-}
-
-body:json {
-  {
-    "nom": "Chaulets",
-    "prenom": "Bernadette",
-    "dateNaissance": "1965-05-15",
-    "email": "bernadette.chaulet@example.com"
-  }
 }
 
 settings {

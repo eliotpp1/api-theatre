@@ -42,6 +42,12 @@ ADMIN_PRENOM=Principal
 ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD=admin123
 
+## Démarrer l'app avec nodemon
+
+```bash
+nodemon server
+```
+
 ## Définir son mot de passe 
 
 Il faut d'abord créer un user avec soit le rôle "member" ou "resped".
@@ -82,7 +88,7 @@ Pour définir son mot de passe :
 ```
 
 Le mot de passe sera alors associé à l'utilisateur qui vient d'être créé.
-vous pourrez alors vous connecter avec l'URL [/](http://localhost:3000/api/users/login) avec en body:
+vous pourrez alors vous connecter avec l'URL http://localhost:3000/api/users/login avec en body:
 ```json
 {
     "email": "test@gmail.com",
