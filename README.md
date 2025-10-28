@@ -82,4 +82,11 @@ Pour définir son mot de passe :
 ```
 
 Le mot de passe sera alors associé à l'utilisateur qui vient d'être créé.
+vous pourrez alors vous connecter avec l'URL [/](http://localhost:3000/api/users/login) avec en body:
+```json
+{
+    "email": "test@gmail.com",
+    "password": "votre_mot_de_passe"
+}
+```
 
