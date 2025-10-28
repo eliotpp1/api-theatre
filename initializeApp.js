@@ -1,6 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('./models/UserModel');
 
 async function initializeAdmin() {
@@ -11,27 +12,37 @@ async function initializeAdmin() {
         });
         console.log('MongoDB connecté ✅');
 
-        const existingAdmin = await User.findOne({ role: 'admin' });
-        if (existingAdmin) {
-            console.log('Un admin existe déjà en base :', existingAdmin.email);
-            process.exit(0);
+        let admin = await User.findOne({ role: 'admin' });
+
+        if (admin) {
+            console.log('Un admin existe déjà :', admin.email);
+        } else {
+            const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
+
+            admin = new User({
+                nom: process.env.ADMIN_NOM,
+                prenom: process.env.ADMIN_PRENOM,
+                email: process.env.ADMIN_EMAIL,
+                dateNaissance: new Date(),
+                passwordHash: hashedPassword,
+                role: 'admin',
+                isActive: true
+            });
+
+            await admin.save();
+            console.log('Admin créé avec succès :', admin.email);
         }
 
-        const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
+        // Génère le JWT pour l’admin
+        const token = jwt.sign(
+            { userId: admin._id, role: admin.role },
+            process.env.PASSWORD_TOKEN_JWT,
+            { expiresIn: '24h' }
+        );
 
-        const admin = new User({
-            nom: process.env.ADMIN_NOM,
-            prenom: process.env.ADMIN_PRENOM,
-            email: process.env.ADMIN_EMAIL,
-            dateNaissance: new Date(),
-            passwordHash: hashedPassword,
-            role: 'admin',
-            isActive: true
-        });
-
-        await admin.save();
-        console.log('Admin créé avec succès', admin.email);
+        console.log('Token JWT admin :', token);
         process.exit(0);
+
     } catch (error) {
         console.error('Erreur lors de l’initialisation :', error);
         process.exit(1);

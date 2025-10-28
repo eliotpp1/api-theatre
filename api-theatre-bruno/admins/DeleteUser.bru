@@ -1,13 +1,17 @@
 meta {
-  name: SignUpUser
+  name: DeleteUser
   type: http
-  seq: 1
+  seq: 4
 }
 
-post {
-  url: http://localhost:3000/api/admins/users
+put {
+  url: http://localhost:3000/api/admins/users/:id
   body: json
   auth: inherit
+}
+
+params:path {
+  id: 6900e39fe8933642e2ce2291
 }
 
 headers {
@@ -16,13 +20,11 @@ headers {
 
 body:json {
   {
-    "nom": "Chaulet",
+    "nom": "Chaulets",
     "prenom": "Bernadette",
-    "dateNaissance": "1965-05-12",
-    "email": "bernadette.chaulet@example.com",
-    "role": "resped"
+    "dateNaissance": "1965-05-15",
+    "email": "bernadette.chaulet@example.com"
   }
-  
 }
 
 settings {

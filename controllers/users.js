@@ -61,7 +61,12 @@ exports.getCurrentUser = (req, res, next) => {
 
 // completeInvite: Permet à un utilisateur invité de définir son mot de passe et d'activer son compte
 exports.completeInvite = (req, res, next) => {
-    const { token, password } = req.body;
+    // On récupère le token depuis la query string
+    const { token } = req.query;
+    const { password } = req.body;
+
+    if (!token) return res.status(400).json({ message: "Token manquant." });
+    if (!password) return res.status(400).json({ message: "Mot de passe requis." });
 
     Invitation.findOne({ token, used: false, expiresAt: { $gt: new Date() } })
         .then((invitation) => {
@@ -69,6 +74,7 @@ exports.completeInvite = (req, res, next) => {
                 return res.status(400).json({ message: "Token invalide ou expiré." });
             }
 
+            // Hash du mot de passe et activation du compte
             bcrypt.hash(password, 10)
                 .then((hash) => {
                     User.findByIdAndUpdate(invitation.userId, {
@@ -77,12 +83,12 @@ exports.completeInvite = (req, res, next) => {
                     })
                         .then(() => {
                             invitation.used = true;
-                            invitation.save();
+                            invitation.save(); // on marque le token comme utilisé
                             res.status(200).json({ message: "Mot de passe défini, compte activé." });
                         })
-                        .catch((error) => res.status(500).json({ error }));
+                        .catch((error) => res.status(500).json({ message: "Erreur mise à jour user", error }));
                 })
-                .catch((error) => res.status(500).json({ error }));
+                .catch((error) => res.status(500).json({ message: "Erreur hash mot de passe", error }));
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch((error) => res.status(500).json({ message: "Erreur serveur", error }));
 };

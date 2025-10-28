@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
         const authHeader = req.headers.authorization;
 
         if (!authHeader) {
-            return res.status(401).json({ message: "Token manquant" });
+            return res.status(401).json({ message: "Token admin manquant" });
         }
 
         const token = authHeader.split(" ")[1];
