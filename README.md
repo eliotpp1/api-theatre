@@ -48,6 +48,17 @@ ADMIN_PASSWORD=admin123
 nodemon server
 ```
 
+## Voir le swagger
+
+Lancer la commande :
+```bash
+npm run swagger
+```
+
+Se rendre sur l'URL:
+
+http://localhost:3001/api-docs/
+
 ## Définir son mot de passe 
 
 Il faut d'abord créer un user avec soit le rôle "member" ou "resped".
