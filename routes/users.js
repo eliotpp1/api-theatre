@@ -5,6 +5,8 @@ const spectaclesCtrl = require("../controllers/spectacles");
 const authResped = require("../middlewares/authResped");
 // Routes pour les utilisateurs
 
+
+
 // Définir son mot de passe et activer le compte via un token d'invitation
 router.post("/complete-invite", userCtrl.completeInvite);
 

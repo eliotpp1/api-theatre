@@ -6,7 +6,8 @@ const adminRoutes = require('./routes/admin.js');
 const atelierRoutes = require('./routes/ateliers.js');
 const spectacleRoutes = require('./routes/spectacles.js');
 
-
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger-output.json");
 // On crée l'application Express
 const app = express();
 
@@ -25,6 +26,10 @@ app.use((req, res, next) => {
     next(); // L'autorisation des différentes méthodes HHTP
 });
 app.use(express.json())
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+const PORT = 3001;
+app.listen(PORT, () => console.log(`Serveur démarré sur http://localhost:${PORT}`));
 
 app.use("/api/users", userRoutes);
 app.use("/api/admins", adminRoutes);

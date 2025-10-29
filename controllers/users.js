@@ -113,7 +113,6 @@ exports.signuUpAtelier = async (req, res, next) => {
 
         const decodedToken = jwt.verify(token, process.env.PASSWORD_TOKEN_JWT);
         const userId = decodedToken.userId;
-        console.log("UserID from token:", userId);
 
         if (!mongoose.Types.ObjectId.isValid(atelierId)) {
             return res.status(400).json({ message: "ID d'atelier invalide" });
