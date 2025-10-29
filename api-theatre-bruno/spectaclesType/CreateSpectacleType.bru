@@ -1,0 +1,35 @@
+meta {
+  name: CreateSpectacleType
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/spectacles/spectacle-type
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTAxMjlmNTFlZWUxZjVlNzI2YTA1Y2MiLCJpYXQiOjE3NjE3MjM1OTgsImV4cCI6MTc2MTgwOTk5OH0.0ZRIuY_0CmCKHWL668GRhkyaOfAxYd7fNNrUuUlx3Kk
+}
+
+body:json {
+  {
+    "date": "2025-12-20",
+    "nombrePersonnes": 5,
+    "roles": {
+      "regisseur": null,
+      "acteurPrincipal": null,
+      "acteur2": null,
+      "acteur3": null,
+      "technicienSon": null
+    }
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

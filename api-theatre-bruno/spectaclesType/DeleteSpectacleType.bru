@@ -1,0 +1,29 @@
+meta {
+  name: DeleteSpectacleType
+  type: http
+  seq: 3
+}
+
+delete {
+  url: http://localhost:3000/api/spectacles/spectacle-type/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 6901c6e6d8e1eea1da728771
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTAxMjlmNTFlZWUxZjVlNzI2YTA1Y2MiLCJpYXQiOjE3NjE3MjM1OTgsImV4cCI6MTc2MTgwOTk5OH0.0ZRIuY_0CmCKHWL668GRhkyaOfAxYd7fNNrUuUlx3Kk
+}
+
+body:json {
+  
+  
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
