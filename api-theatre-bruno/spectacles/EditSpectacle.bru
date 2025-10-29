@@ -1,17 +1,17 @@
 meta {
   name: EditSpectacle
   type: http
-  seq: 5
+  seq: 4
 }
 
 put {
-  url: http://localhost:3000/api/spectacles/spectacle-type/:id
+  url: http://localhost:3000/api/shows/:id
   body: json
   auth: inherit
 }
 
 params:path {
-  id: 6901c6e6d8e1eea1da728771
+  id: 6901f80295fe9fcbb2100eaa
 }
 
 headers {
@@ -20,16 +20,17 @@ headers {
 
 body:json {
   {
-    "date": "2025-12-20",
-    "nombrePersonnes": 4,
+    "nom": "Improvisation de Fin d’Annéeeee",
+    "description": "Spectacle unique organisé par les étudiants.",
+    "nombrePersonnes": 3,
     "roles": {
-      "regisseur": null,
       "acteurPrincipal": null,
-      "acteur2": null,
+      "acteurSecondaire": null,
       "technicienSon": null
-    }
+    },
+    "date": "2025-11-15",
+    "lieu": "Salle Polyvalente de Niort"
   }
-  
 }
 
 settings {

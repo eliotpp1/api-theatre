@@ -28,8 +28,8 @@ app.use(express.json())
 
 app.use("/api/users", userRoutes);
 app.use("/api/admins", adminRoutes);
-app.use("/api/ateliers", atelierRoutes);
-app.use("/api/spectacles", spectacleRoutes);
+app.use("/api/workshops", atelierRoutes);
+app.use("/api/shows", spectacleRoutes);
 
 // On export l’application
 module.exports = app;

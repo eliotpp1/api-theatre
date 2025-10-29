@@ -18,7 +18,6 @@ module.exports = async (req, res, next) => {
 
         // On récupère le rôle de l'utilisateur via l'id du token
         const userId = decodedToken.userId;
-        console.log("UserID from token:", userId);
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: "Utilisateur non trouvé" });

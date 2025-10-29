@@ -1,0 +1,30 @@
+meta {
+  name: PostulerRole
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:3000/api/users/:id/applications
+  body: json
+  auth: inherit
+}
+
+params:path {
+  id: 6901f36d37f97c7435c659ae
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTAxZDM2MDBlZmNhYTVlMzE3MGRmM2QiLCJpYXQiOjE3NjE3MzI0ODQsImV4cCI6MTc2MTgxODg4NH0.MXOUVE0yyV-k1b4mj3phDSKWnaloPBasf0Lbd0cWkbg
+}
+
+body:json {
+  {
+    "role": "acteurPrincipal"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

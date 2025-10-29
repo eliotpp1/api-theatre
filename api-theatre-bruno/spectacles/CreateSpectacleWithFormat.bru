@@ -1,17 +1,13 @@
 meta {
-  name: DeleteSpectacle
+  name: CreateSpectacleWithFormat
   type: http
-  seq: 3
+  seq: 1
 }
 
-delete {
-  url: http://localhost:3000/api/shows/:id
-  body: none
+post {
+  url: http://localhost:3000/api/shows/
+  body: json
   auth: inherit
-}
-
-params:path {
-  id: 6901f80295fe9fcbb2100eaa
 }
 
 headers {
@@ -19,7 +15,11 @@ headers {
 }
 
 body:json {
-  
+  {
+    "formatId": "6901db3ce13415bba7982da9",
+    "date": "2025-12-20",
+    "lieu": "Théâtre de Bordeaux"
+  }
   
 }
 

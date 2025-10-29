@@ -1,7 +1,7 @@
 meta {
   name: CreateSpectacle
   type: http
-  seq: 5
+  seq: 2
 }
 
 post {
@@ -16,19 +16,18 @@ headers {
 
 body:json {
   {
-    "nom": "Le lac des signes",
-    "date": "2025-12-20",
-    "nombrePersonnes": 5,
-    "lieux": "Salle des fêtes de Bdx",
-    "description": "Un classique",
+    "nom": "test role",
+    "description": "Spectacle unique organisé par les étudiants.",
+    "nombrePersonnes": 3,
     "roles": {
-      "regisseur": null,
       "acteurPrincipal": null,
-      "acteur2": null,
-      "acteur3": null,
+      "acteurSecondaire": null,
       "technicienSon": null
-    }
+    },
+    "date": "2025-11-15",
+    "lieu": "Salle Polyvalente de Niort"
   }
+  
   
 }
 

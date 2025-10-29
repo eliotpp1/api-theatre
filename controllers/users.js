@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require("../models/UserModel");
 const Invitation = require("../models/InvitationModel");
 const Atelier = require("../models/AtelierModel");
+const Spectacle = require("../models/Spectacle");
 const bcrypt = require("bcrypt");
 
 // loginUser: Authentifie un utilisateur et retourne un token JWT
@@ -143,3 +144,58 @@ exports.signuUpAtelier = async (req, res, next) => {
         res.status(500).json({ message: "Erreur serveur lors de l'inscription à l'atelier.", error });
     }
 };
+
+// Récupérer les statistiques d’un membre
+exports.getMemberStats = async (req, res) => {
+    try {
+        const { id: userId } = req.params;
+
+        // Vérifie que le user existe et que c’est bien un membre
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).json({ error: "Utilisateur introuvable" });
+        if (user.role !== "member") {
+            return res.status(403).json({ error: "L’utilisateur n’est pas un membre." });
+        }
+
+        // Cherche toutes les candidatures dans les spectacles
+        const spectacles = await Spectacle.find({
+            "candidatures.memberId": userId,
+        });
+
+        let totalCandidatures = 0;
+        const statsSpectacles = [];
+
+        for (const spectacle of spectacles) {
+            const candidaturesMembre = spectacle.candidatures.filter(
+                (c) => c.memberId.toString() === userId
+            );
+
+            totalCandidatures += candidaturesMembre.length;
+
+            candidaturesMembre.forEach((c) => {
+                statsSpectacles.push({
+                    spectacleId: spectacle._id,
+                    spectacleNom: spectacle.nom,
+                    role: c.role,
+                    status: c.status,
+                    dateCandidature: c.createdAt,
+                });
+            });
+        }
+
+        res.status(200).json({
+            membre: {
+                id: user._id,
+                nom: user.nom,
+                prenom: user.prenom,
+                email: user.email,
+            },
+            totalCandidatures,
+            candidatures: statsSpectacles,
+        });
+    } catch (err) {
+        console.error("Erreur getMemberStats:", err);
+        res.status(500).json({ error: err.message });
+    }
+};
+

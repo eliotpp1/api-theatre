@@ -1,17 +1,17 @@
 meta {
-  name: EditSpectacleType
+  name: EditFormat
   type: http
   seq: 4
 }
 
 put {
-  url: http://localhost:3000/api/spectacles/spectacle-type/:id
+  url: http://localhost:3000/api/shows/formats/:id
   body: json
   auth: inherit
 }
 
 params:path {
-  id: 6901c6e6d8e1eea1da728771
+  id: 6901f8b295fe9fcbb2100edc
 }
 
 headers {
@@ -21,8 +21,9 @@ headers {
 body:json {
   {
     "date": "2025-12-20",
-    "nombrePersonnes": 4,
+    "nombrePersonnes": 5,
     "roles": {
+      "toto": null,
       "regisseur": null,
       "acteurPrincipal": null,
       "acteur2": null,

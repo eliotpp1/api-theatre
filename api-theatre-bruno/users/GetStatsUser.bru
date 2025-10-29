@@ -1,17 +1,17 @@
 meta {
-  name: GetAtelier
+  name: GetStatsUser
   type: http
-  seq: 5
+  seq: 7
 }
 
 get {
-  url: http://localhost:3000/api/workshops/:id
+  url: http://localhost:3000/api/users/:id/stats
   body: none
   auth: inherit
 }
 
 params:path {
-  id: 690133fc235cbc7202d46006
+  id: 6901d3600efcaa5e3170df3d
 }
 
 settings {

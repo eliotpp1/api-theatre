@@ -5,17 +5,17 @@ const authResped = require("../middlewares/authResped");
 
 
 
-// Créer un spectacle type
-router.post("/spectacle-type", authResped, spectaclesCtrl.createSpectacleType);
+// Créer un format
+router.post("/formats", authResped, spectaclesCtrl.createFormat);
 
-// Récupérer tous les spectacles types
-router.get("/spectacle-type", spectaclesCtrl.getAllSpectacleTypes);
+// Récupérer tous les formats
+router.get("/formats", spectaclesCtrl.getAllFormats);
 
-//Supprimer un spectacle type
-router.delete("/spectacle-type/:id", authResped, spectaclesCtrl.deleteSpectacleType);
+//Supprimer un format
+router.delete("/formats/:id", authResped, spectaclesCtrl.deleteFormat);
 
-// Mettre à jour un spectacle type
-router.put("/spectacle-type/:id", authResped, spectaclesCtrl.updateSpectacleType);
+// Mettre à jour un format
+router.put("/formats/:id", authResped, spectaclesCtrl.updateFormat);
 
 // Créer un spectacle
 router.post("/", authResped, spectaclesCtrl.createSpectacle);
@@ -28,10 +28,6 @@ router.delete("/:id", authResped, spectaclesCtrl.deleteSpectacle);
 
 // Mettre à jour un spectacle
 router.put("/:id", authResped, spectaclesCtrl.updateSpectacle);
-
-// Créer un spectacle à partir d’un spectacle type
-router.post("/from-type/:idType", authResped, spectaclesCtrl.createSpectacleFromType);
-
 
 
 // Fin du document

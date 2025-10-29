@@ -1,0 +1,31 @@
+meta {
+  name: ValiderCandidature
+  type: http
+  seq: 5
+}
+
+patch {
+  url: http://localhost:3000/api/users/shows/:id/applications/:candidatureId
+  body: json
+  auth: inherit
+}
+
+params:path {
+  candidatureId: 6901f4e281b3fd946c5426ab
+  id: 6901f36d37f97c7435c659ae
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTAxMjlmNTFlZWUxZjVlNzI2YTA1Y2MiLCJpYXQiOjE3NjE3MzI5OTgsImV4cCI6MTc2MTgxOTM5OH0.B-RYJLmYMH78dhrmUi_WsPS6ZrAiUXIK7Z5-SpxFCkc
+}
+
+body:json {
+  {
+    "status": "accepted"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
